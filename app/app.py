@@ -19,11 +19,11 @@ class Task:  # Task class for better structure
 
 class Course:  # Class for Course
     def __init__(self, course_name):
-        self.course_name = course_name  # Corrected variable assignment
-        self.tasks = []
+        self.course_name = course_name # Initializing the course name
+        self.tasks = [] # A course can have multiple tasks 
 
     def add_task(self, task_name, assigned_date, due_date):
-        task = Task(task_name, assigned_date, due_date)  # Creating a Task object
+        task = Task(task_name, assigned_date, due_date)  # Creating a Task object with the given properties
         self.tasks.append(task)
 
     def remove_task(self, task_name):
@@ -48,7 +48,7 @@ print(f"Tasks after removal: {cs_course.show_tasks()}")
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('todo.html')
 
 
 if __name__ == '__main__':
