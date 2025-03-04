@@ -1,11 +1,10 @@
-from flask import Flask, render_template  # Fixed import (Flask should be lowercase)
+from flask import Flask, render_template, request, redirect, url_for  # Fixed import (Flask should be lowercase)
 from datetime import datetime
 
 app = Flask(__name__)
 
 # DATE/TIME FORMAT: "dd/mm/yyyy hh:mm"
 CurrentDateTime = datetime.now()
-
 
 class Task:  # Task class for better structure
     def __init__(self, name, assigned_date, due_date):
@@ -15,7 +14,6 @@ class Task:  # Task class for better structure
 
     def __repr__(self):  # String representation for easy debugging
         return f"Task('{self.name}', Assigned: {self.assigned_date}, Due: {self.due_date})"
-
 
 class Course:  # Class for Course
     def __init__(self, course_name):
@@ -34,22 +32,17 @@ class Course:  # Class for Course
         return self.tasks
 
 
-# Example Usage
-cs_course = Course("CSCE 3220 - Human-Computer Interaction")
-cs_course.add_task("Finish Project Proposal", "26/02/2025 12:00", "05/03/2025 23:59")
-cs_course.add_task("Read Chapter 3", "27/02/2025 10:00", "01/03/2025 23:59")
-
-print(f"Tasks for {cs_course.course_name}: {cs_course.show_tasks()}")
-
-# Removing a task
-cs_course.remove_task("Read Chapter 3")
-print(f"Tasks after removal: {cs_course.show_tasks()}")
-
+@app.route('/add_task', methods=['POST']) # Function to add tasks, this is triggered when 'Add Task' button is clicked.
+def add_task():
+    task_name = request.form['task_name']
+    assigned_date = request.form['assigned_date']
+    due_date = request.form['due_date']
+    # I will handle saving of task to database here
+    return redirect(url_for('todo'))  # Redirect to your homepage or task list page
 
 @app.route('/')
-def home():
+def todo():
     return render_template('todo.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
