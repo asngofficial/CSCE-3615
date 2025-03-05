@@ -81,7 +81,7 @@ label {
 }
 
 .popup.show {
-    display: flex; /* Show when 'show' class is added */
+    display: flex; /* Displays the popup form when 'show' class is added */
 }
 
 .popup-content {

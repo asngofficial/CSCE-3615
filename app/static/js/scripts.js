@@ -24,7 +24,8 @@ document.getElementById("taskForm").addEventListener("submit", function (event) 
 
     // Clear form inputs and close the popup
     document.getElementById("taskForm").reset();
-    document.getElementById("taskFormPopup").style.display = "none";
+    document.getElementById("taskFormPopup").classList.remove("show");
+
 });
 
 // Function to Add Task to the List
@@ -32,8 +33,9 @@ function addTaskToList(taskName, assignedDate, dueDate) {
     const taskItems = document.getElementById("taskItems");
     const li = document.createElement("li");
 
-    // Create task content and action buttons
-    li.innerHTML = `
+    // Create task content and action buttons 
+    // This wtites to HTMl
+    li.innerHTML = ` 
         <div class="task-item">
             <div class="task-content">
                 <strong>${taskName}</strong> 
